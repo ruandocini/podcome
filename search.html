@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link rel="stylesheet" href="https://indestructibletype.com/fonts/Jost.css" type="text/css" charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Josefin+Sans" />
+        <link rel="shortcut icon" href="imgs/logo.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title> Comer Melhor </title>
+        <link rel="stylesheet" href="css/mapa.css">
+        <link href="css/stylish-portfolio.css" rel="stylesheet">
+        <style>
+            #map{
+                height: 750px;
+                width: 100%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar"> 
+            <a href="index.html"> <i class="fas fa-angle-left"></i> </a>
+            <ul>
+                <li> <a href="index.html"> HOME </a></li>
+                <li> <a href="search.html"> SEARCH </a></li> 
+            </ul>
+        </div>
+
+        <input id="input" style="height: 25px; width:1509px; margin-bottom: 2px;">
+
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                var options = {
+                    zoom: 15,
+                    center: {
+                        lat: -23.552559,
+                        lng: -46.625561
+                    }
+                }
+
+                var map = new google.maps.Map(document.getElementById('map'), options);
+
+                addMarker({coords:{lat:-23.552559, lng:-46.625561},text:'Rest1'});
+                addMarker({coords:{lat:-23.542559, lng:-46.655561},text:'Rest1'});
+
+                //func add marker
+                function addMarker(props, is_place=true){
+                    
+                    if(is_place){
+                        var url = 'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
+                        }else{
+                            var url = 'imgs/verde escuro.png'
+                        };
+
+                    var icon = {
+                        url: url,
+                        scaledSize: new google.maps.Size(40, 40), // scaled size
+                        origin: new google.maps.Point(0,0), // origin
+                        anchor: new google.maps.Point(0, 0) // anchor
+                    };
+
+                    var marker = new google.maps.Marker({
+                        position:props.coords,
+                        map:map,
+                        icon:icon
+                    });
+
+                     var infoWindow = new google.maps.InfoWindow({content:props.text});
+
+                    marker.addListener('click', function(){infoWindow.open(map, marker);});
+
+                }
+                
+                function search(input){
+                    url='http://api.positionstack.com/v1/forward?access_key=b7bfc96852ed7b4ffe8c1b0f16749248&query='+input+'&limit=1';
+                    fetch(url).then(function(response){
+                        return response.json();
+                    }).then(function(data){
+                        map.setCenter({lat:data.data[0].latitude, lng:data.data[0].longitude});
+                        addMarker({coords:{lat:data.data[0].latitude, lng:data.data[0].longitude},text:'You'}, is_place=false)
+                    });
+                };
+
+                document.getElementById('input').addEventListener('keypress', function(e){
+                    if (e.key === 'Enter') {
+                        search(document.getElementById('input').value);
+                        getAllRestaurants();
+                    }
+                });
+
+                function getAllRestaurants(){
+                    api_call = 'http://localhost:8080/api/v1/restaurantes/restaurantes'
+                    fetch(api_call).then(function(response){
+                        return response.json();
+                    }).then(function(data){
+                        for (counter=0; counter<data.length; counter++){
+                            addMarker({coords:{lat:data[counter].latitude, lng:data[counter].longitude},text:data[counter].nome});
+                        }
+                    });
+                }
+
+                getAllRestaurants();
+
+            }
+        </script>
+        <script async defer 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDB0bW9wweKavZygNsWciNLzcrotfSQKh4&libraries=places&callback=initMap">
+        </script>
+    </body>
+</html>
