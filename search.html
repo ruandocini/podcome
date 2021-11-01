@@ -45,8 +45,9 @@
 
                 var map = new google.maps.Map(document.getElementById('map'), options);
 
-                addMarker({coords:{lat:-23.552559, lng:-46.625561},text:'Rest1'});
-                addMarker({coords:{lat:-23.542559, lng:-46.655561},text:'Rest1'});
+                addMarker({coords:{lat:-23.552559, lng:-46.625561},text:'Dummy1'});
+                addMarker({coords:{lat:-23.542559, lng:-46.655561},text:'Dummy2'});
+                addMarker({coords:{lat:-23.542559, lng:-46.685561},text:'Dummy3'});
 
                 //func add marker
                 function addMarker(props, is_place=true){
@@ -54,7 +55,7 @@
                     if(is_place){
                         var url = 'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
                         }else{
-                            var url = 'imgs/verde escuro.png'
+                            var url = 'http://maps.google.com/mapfiles/kml/paddle/red-stars.png'
                         };
 
                     var icon = {
@@ -99,7 +100,12 @@
                         return response.json();
                     }).then(function(data){
                         for (counter=0; counter<data.length; counter++){
-                            addMarker({coords:{lat:data[counter].latitude, lng:data[counter].longitude},text:data[counter].nome});
+                            addMarker(
+                                {
+                                    coords:{lat:data[counter].latitude, lng:data[counter].longitude},
+                                    text:data[counter].nome
+                                }
+                            );
                         }
                     });
                 }
