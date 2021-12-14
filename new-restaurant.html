@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="imgs/logo.png">
+    <title>Comer Melhor</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/form.css">
+
+    <script>
+      function createRestaurant() {
+        const name = document.getElementById("restaurant_name").value;
+        const address = document.getElementById("restaurant_address").value;
+        let selected_restriction='';
+
+        const radio_buttons = document.querySelectorAll('input[name="restriction"]');
+        for (const radio_button of radio_buttons) {
+          if (radio_button.checked) {
+            selected_restriction = radio_button.value;
+            break;
+          }
+        }
+
+        //?
+      }
+      
+    </script>
+
+  </head>
+
+  <body>
+    <div class="testbox">
+      <form>
+        <div class="banner">
+          <h1>Novo Restaurante</h1>
+        </div>
+        <br/>
+          <div class="item">
+            <label for="restaurant_name"> Nome do Restaurente<span>*</span></label>
+            <input id="restaurant_name" type="text" name="restaurant_name" />
+          </div>
+          <div class="item">
+            <label for="restaurant_address">Endereço do Restaurante<span>*</span></label>
+            <input id="restaurant_address" type="text" name="restaurant_address" />
+          </div>
+          <div class="question">
+            <label>Qual desses é verdade sobre seu restaurante?</label>
+            <div class="question-answer">
+              <div>
+                <input type="radio" value="feira_livre" id="feira_livre" name="restriction"/>
+                <label for="feira_livre" class="radio"><span>Meu restaurante faz parte de uma feira livre.</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="vegano" id="vegano" name="restriction"/>
+                <label for="vegano" class="radio"><span>Meu restaurante possui pratos para veganos.</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="celiaco" id="celiaco" name="restriction"/>
+                <label for="celiaco" class="radio"><span>Meu restaurante possui pratos para celíacos.</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="diabetico" id="diabetico" name="restriction"/>
+                <label for="diabetico" class="radio"><span>Meu restaurante possui pratos para diabéticos.</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="lactose" id="lactose" name="restriction"/>
+                <label for="lactose" class="radio"><span>Meu restaurante possui pratos para intolerantes à lactose.</span></label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button type="submit" onclick="createRestaurant()" href="/">Novo Restaurante</button>
+            <button type="reset" href="C:/podcome/new-restaurant.html">Cancelar</button>
+          </div>
+      </form>
+    </div>
+  </body>
+</html>
