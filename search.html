@@ -27,12 +27,14 @@
             <ul>
                 <li> <a href="index.html"> HOME </a></li>
                 <li> <a href="search.html"> SEARCH </a></li> 
+                <!-- <li> <button id="btn"> VEGAN </button></li>  -->
             </ul>
         </div>
 
         <input id="input" style="height: 25px; width:1509px; margin-bottom: 2px;">
 
         <div id="map"></div>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
         <script>
             function initMap() {
                 var options = {
@@ -50,13 +52,13 @@
                 addMarker({coords:{lat:-23.542559, lng:-46.685561},text:'Dummy3'});
 
                 //func add marker
-                function addMarker(props, is_place=true){
+                function addMarker(props, is_place=true, url){
                     
                     if(is_place){
-                        var url = 'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
-                        }else{
-                            var url = 'http://maps.google.com/mapfiles/kml/paddle/red-stars.png'
-                        };
+                        url = 'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
+                    }else{
+                        url = 'imgs/pino-de-localizacao.png'
+                    }
 
                     var icon = {
                         url: url,
@@ -78,12 +80,12 @@
                 }
                 
                 function search(input){
-                    url='http://api.positionstack.com/v1/forward?access_key=b7bfc96852ed7b4ffe8c1b0f16749248&query='+input+'&limit=1';
+                    url='https://us1.locationiq.com/v1/search.php?key=pk.00a9e0eac42d8b6e004961eda7c961df&q='+input+'&format=json';
                     fetch(url).then(function(response){
                         return response.json();
                     }).then(function(data){
-                        map.setCenter({lat:data.data[0].latitude, lng:data.data[0].longitude});
-                        addMarker({coords:{lat:data.data[0].latitude, lng:data.data[0].longitude},text:'You'}, is_place=false)
+                        map.setCenter({lat:parseFloat(data[0].lat), lng:parseFloat(data[0].lon)});
+                        addMarker({coords:{lat:parseFloat(data[0].lat), lng:parseFloat(data[0].lon)},text:'You'}, is_place=false)
                     });
                 };
 
@@ -94,28 +96,47 @@
                     }
                 });
 
-                function getAllRestaurants(){
-                    api_call = 'http://localhost:8080/api/v1/restaurantes/restaurantes'
+                function getAllRestaurants(restriction, url){
+                    restriction = restriction || false;
+                    api_call = 'http://localhost:8080/api/v1/restaurantes/restaurantes';
                     fetch(api_call).then(function(response){
                         return response.json();
                     }).then(function(data){
                         for (counter=0; counter<data.length; counter++){
-                            addMarker(
-                                {
-                                    coords:{lat:data[counter].latitude, lng:data[counter].longitude},
-                                    text:data[counter].nome
+                            console.log(data[counter].restricao);
+                            if (data[counter].restricao == restriction || restriction == false){
+                                addMarker(
+                                    {
+                                        coords:{lat:data[counter].latitude, lng:data[counter].longitude},
+                                        text:data[counter].nome,
+                                        url:'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
+                                    });
                                 }
-                            );
                         }
                     });
                 }
 
-                getAllRestaurants();
+                getAllRestaurants(false);
+
+                var btn = document.getElementById("btn");
+                btn.addEventListener("click", function() {
+                    getAllRestaurants("vegan", 'https://pngset.com/images/vegan-logo-vegan-or-vegetarian-symbol-plant-flower-vegetation-emblem-transparent-png-1210191.png');
+                });
 
             }
         </script>
         <script async defer 
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDB0bW9wweKavZygNsWciNLzcrotfSQKh4&libraries=places&callback=initMap">
         </script>
+        
+    <!-- <div class="container"> 
+
+        <a href="#" onclick="getAllRestaurants('vegan')"> 
+            <h3 style="top: 4px; left: 1100px;" class="escrito"> Vegano </h3> 
+        </a>
+        <a href="#" onclick="getAllRestaurants('celiaco')"> 
+            <h3 style="top: 4px; left: 1200px;" class="escrito"> Celiaco </h3> 
+        </a>
+    </div> -->
     </body>
 </html>

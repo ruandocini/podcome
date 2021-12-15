@@ -1,0 +1,145 @@
+{
+    "nome":"Purana.co",
+    "endereco":"X",
+    "restricao":"vegan",
+    "latitude":-23.561705,
+    "longitude":-46.681878
+};
+{
+    "nome":"Homa",
+    "endereco":"X",
+    "restricao":"vegan",
+    "latitude":-23.566415,
+    "longitude":-46.688855,
+    "preco":"$$$",
+    "nota":5
+}
+{
+    "nome":"Tomyam",
+    "endereco":"X",
+    "restricao":"gluten",
+    "latitude":-23.561705,
+    "longitude":-46.681878,
+    "preco":"$$$",
+    "nota":5
+}
+{
+    "nome":"Dona Vitamina",
+    "endereco":"X",
+    "restricao":"gluten",
+    "latitude":-23.564563,
+    "longitude":-46.683899,
+    "preco":"$$$",
+    "nota":1
+}
+{
+    "nome":"Le Manjue Organique - Jardins",
+    "endereco":"X",
+    "restricao":"gluten",
+    "latitude":-23.564846,
+    "longitude":-46.669558,
+    "preco":"$$$",
+    "nota":5
+}
+{
+    "nome":"Vila das Rosas - Pinheiros",
+    "endereco":"X",
+    "restricao":"gluten",
+    "latitude":-23.560822,
+    "longitude":-46.696360,
+    "preco":"$$$",
+    "nota":4.5
+}
+{
+    "nome":"Manai Gastronomia",
+    "endereco":"X",
+    "restricao":"gluten",
+    "latitude":-23.530190,
+    "longitude":-46.734457,
+    "preco":"$$$",
+    "nota":4.6
+}
+{
+    "nome":"Grão Fino",
+    "endereco":"X",
+    "restricao":"lactose",
+    "latitude":-23.581292,
+    "longitude":-46.677041,
+    "preco":"$$$$$",
+    "nota":4
+}
+{
+    "nome":"Prá lá de bom",
+    "endereco":"X",
+    "restricao":"lactose",
+    "latitude":-23.608864,
+    "longitude":-46.663779,
+    "preco":"$$$$$",
+    "nota":3
+}
+{
+    "nome":"Isabela Akkari",
+    "endereco":"X",
+    "restricao":"lactose",
+    "latitude":-23.593131,
+    "longitude":-46.676598,
+    "preco":"$$$",
+    "nota":4
+}
+f(id=="vegan"){
+                        locations = getAllRestaurants(id)
+                    }
+                    if(id=="gluten"){
+                        locations = [
+	                        ["Supra di Mauro Maia", -23.588122, -46.679296, "$$$", 4.5],
+	                        ["Recanto Vegetariano", -23.608352, -46.692249, "$$", 4.5],
+	                        ["Barão Natural", -23.547352, -46.572053, "$", 4],
+	                        ["Vegg's Restaurante", -23.601381, -46.636164, "$", 4.5],
+	                        ["Casa Prema", -23,570964, -46.693134, "$", 4.5],
+	                        ["Ají Inspiração Peruana", -23.564064, -46.683246, "$", 4.5],
+	                        ["Vila Salute - Emporio & Rotisserie", -23.561583, -46.690238, "$", 4.5]
+                        ];
+                        icone = 'imgs/amarelosmall.png';
+                    }
+                    if(id=="lactose"){
+                        locations = [
+                            ["Isabela Akkari",-23.593131,-46.676598,"$$$",4.5],
+                            ["Casa Santa Luzia",-23.564454,-46.665782,"$$$$",5],
+                            ["Healthy Bites",-23.594583,-46.677056,"$$$$",4],
+                            ["Lilóri",-23.565121,-46.661542,"$$$",4],
+                            ["Tea Connection",-23.565512,-46.664366,"$$",5],
+                            ["Urban Remedy",-23.562511,-46.669529,"$$$",4.5]
+                        ];
+                        icone = 'imgs/verdesmall.png';
+                    }
+                    if(id=="diabetes"){
+                        locations = [
+                            ["Buttina", -23.631609, -46.737084, "$$", 4],
+                            ["B.LEM Portuguese Bakery", -23.564,033, -46.683,389, "$", 4.5],
+                            ["Amor aos pedaços", -23.594128, -46.6329654, "$$$", 5],
+                            ["Zucco Jardins", -23.565269, -46.669785, "$$$", 4],
+                            ["Suave Sabor", -23.549089, -46.560688, "$", 4.5],
+                            ["Bendito Frio", -23.602653, -46.668590, "$", 4]
+                        ];
+                        icone = 'imgs/verdinho.png';
+                    }
+                    if(id=="feiras"){
+                        locations = [
+                            ["VILA FORMOSA",-23.558733,-46.550164,"TV RUA PRETORIA"],
+                            ["PRACA SANTA HELENA",-23.584852,-46.574716,"RUA OLIVEIRA GOUVEIA"],
+                            ["CONCORDIA",-23.536131,-46.610332,"TV RUA BRESSER"],
+                            ["VILA NOVA GRANADA",-23.520880,-46.513450,"RUA OLIVIA DE OLIVEIRA"],
+                            ["PARQUE SAVOY CITY",-23.568665,-46.485000,"RUA DR CELSO PACHECO BETIM",],
+                            ["MAR PAULISTA",-23.691790,-46.659953,"ESTRADA DO ALVARENGA"],
+                            ["CRUZ DAS ALMAS",-23.481683,-46.701030,"AV ELISIO TEIXEIRA LEITE"],
+                            ["LAJEADO",-23.523125,-46.426341,"RUA JOSE MARTINS DOS SANTOS",],
+                            ["ALTO DAS PERDIZES",-23.539369,-46.673057,"PONTF.UNIVERSIDADE CATOLICA"],
+                            ["MARIA CARLOTA", -23.530784,-46.527190,"LOC AV AMADOR BUENO DA VEIGA"],
+                            ["CECILIA ITER",-23.521470,-46.434970,"P FINAL ON VILA PROGRESSO"],
+                            ["VILA SONIA",-23.592640,-46.731043,"PROXIMO DISTRITO POLICIAL"],
+                            ["COHAB FERNAO DIAS",-23.486440,-46.569768,"ALONSO P B AVENTURA DE SOUZA"],
+                            ["VILA OLIVIERI",-23.645941,-46.594968,"RUA CARLA LIVIERO"],
+                            ["COCAIA",-23.752316,-46.681941,"RUA CAMPO DO ARAVIL"]
+                        ];
+                        icone = 'imgs/laranjasmall.png';
+                    }
