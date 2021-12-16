@@ -3,8 +3,11 @@
     "endereco":"X",
     "restricao":"vegan",
     "latitude":-23.561705,
-    "longitude":-46.681878
-};
+    "longitude":-46.681878,
+    "preco":"$$$",
+    "nota":5,
+    "temDelivery": false
+}
 {
     "nome":"Homa",
     "endereco":"X",
@@ -12,7 +15,8 @@
     "latitude":-23.566415,
     "longitude":-46.688855,
     "preco":"$$$",
-    "nota":5
+    "nota":5,
+    "temDelivery": false
 }
 {
     "nome":"Tomyam",
@@ -21,7 +25,8 @@
     "latitude":-23.561705,
     "longitude":-46.681878,
     "preco":"$$$",
-    "nota":5
+    "nota":5,
+    "temDelivery": true
 }
 {
     "nome":"Dona Vitamina",
@@ -30,7 +35,8 @@
     "latitude":-23.564563,
     "longitude":-46.683899,
     "preco":"$$$",
-    "nota":1
+    "nota":1,
+    "temDelivery": false
 }
 {
     "nome":"Le Manjue Organique - Jardins",
@@ -39,7 +45,8 @@
     "latitude":-23.564846,
     "longitude":-46.669558,
     "preco":"$$$",
-    "nota":5
+    "nota":5,
+    "temDelivery": true
 }
 {
     "nome":"Vila das Rosas - Pinheiros",
@@ -48,7 +55,8 @@
     "latitude":-23.560822,
     "longitude":-46.696360,
     "preco":"$$$",
-    "nota":4.5
+    "nota":4.5,
+    "temDelivery": false
 }
 {
     "nome":"Manai Gastronomia",
@@ -57,7 +65,8 @@
     "latitude":-23.530190,
     "longitude":-46.734457,
     "preco":"$$$",
-    "nota":4.6
+    "nota":4.6,
+    "temDelivery": true
 }
 {
     "nome":"Grão Fino",
@@ -67,6 +76,7 @@
     "longitude":-46.677041,
     "preco":"$$$$$",
     "nota":4
+    "temEntrega": true
 }
 {
     "nome":"Prá lá de bom",
@@ -75,7 +85,8 @@
     "latitude":-23.608864,
     "longitude":-46.663779,
     "preco":"$$$$$",
-    "nota":3
+    "nota":3,
+    "temEntrega": false
 }
 {
     "nome":"Isabela Akkari",

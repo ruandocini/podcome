@@ -32,8 +32,9 @@
                                     nome:data[counter].nome,
                                     lat:data[counter].latitude,
                                     long:data[counter].longitude,
-                                    price:'$$$',
-                                    stars:3
+                                    price:data[counter].preco,
+                                    stars:data[counter].nota,
+                                    temEntrega:data[counter].temEntrega
                                 };
                                 x.push(loc);
                             }
@@ -61,16 +62,23 @@
                 
                 function carregarPontos(restaurants){
                     console.log(restaurants);
-                    url = 'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
-
-                    var icon = {
-                        url: url,
-                        scaledSize: new google.maps.Size(40, 40), // scaled size
-                        origin: new google.maps.Point(0,0), // origin
-                        anchor: new google.maps.Point(0, 0) // anchor
-                    };
 
                     for (i = 0; i < restaurants.length; i++) {
+                        var url = "";
+                        console.log(restaurants[i].temEntrega);
+                        if (restaurants[i].temEntrega){
+                            url = 'https://cdn-icons.flaticon.com/png/512/2308/premium/2308855.png?token=exp=1639616656~hmac=f3657333051570902b2344c6de7d7faa';
+                        }else{
+                            url = 'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
+                        }
+
+                        var icon = {
+                            url: url,
+                            scaledSize: new google.maps.Size(40, 40), // scaled size
+                            origin: new google.maps.Point(0,0), // origin
+                            anchor: new google.maps.Point(0, 0) // anchor
+                        };
+
                         marker = new google.maps.Marker({
                             position: new google.maps.LatLng(restaurants[i].lat, restaurants[i].long),
                             title: restaurants[i].nome,
