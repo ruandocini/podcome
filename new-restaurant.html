@@ -11,19 +11,62 @@
       function createRestaurant() {
         const name = document.getElementById("restaurant_name").value;
         const address = document.getElementById("restaurant_address").value;
-        let selected_restriction='';
+        const contact = document.getElementById("restaurant_contact").value;
+        
+        let price = '';
+        let restriction = '';
 
-        const radio_buttons = document.querySelectorAll('input[name="restriction"]');
-        for (const radio_button of radio_buttons) {
-          if (radio_button.checked) {
-            selected_restriction = radio_button.value;
+        const price_radio_buttons = document.querySelectorAll('input[name="price"]');
+        for (const price_radio_button of price_radio_buttons) {
+          if (price_radio_button.checked) {
+            price = price_radio_button.value;
+            break;
+          }
+        }
+        
+        const restriction_radio_buttons = document.querySelectorAll('input[name="restriction"]');
+        for (const restriction_radio_button of restriction_radio_buttons) {
+          if (restriction_radio_button.checked) {
+            restriction = restriction_radio_button.value;
             break;
           }
         }
 
-        //?
-      }
+        const delivery_radio_buttons = document.querySelectorAll('input[name="delivery"]');
+        for (const delivery_radio_button of delivery_radio_buttons) {
+          if (restriction_radio_button.checked) {
+            if(restriction_radio_button.value=="possui_entrega"){
+              delivery = true;
+            }
+            else{
+              delivery = false;
+            }
+          }
+        }
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+                alert(this.responseText);
+          }
+        };
+        xhttp.open("POST", "/api/v1/restaurantes/adicionar", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(
+          {
+            "nome":name,
+            "endereco":address,
+            "restricao":restriction,
+            "latitude":-23.581292,
+            "longitude":-46.677041,
+            "preco":price,
+            "nota":4,
+            "temEntrega":delivery,
+            "contato":contact
+          }
+        );
       
+      }
     </script>
 
   </head>
@@ -35,14 +78,48 @@
           <h1>Novo Restaurante</h1>
         </div>
         <br/>
+
           <div class="item">
             <label for="restaurant_name"> Nome do Restaurente<span>*</span></label>
             <input id="restaurant_name" type="text" name="restaurant_name" />
           </div>
+
           <div class="item">
             <label for="restaurant_address">Endereço do Restaurante<span>*</span></label>
             <input id="restaurant_address" type="text" name="restaurant_address" />
           </div>
+
+          <div class="item">
+            <label for="restaurant_contact">Contato do Restaurante<span>*</span></label>
+            <input id="restaurant_contact" type="text" name="restaurant_contact" />
+          </div>
+
+          <div class="question">
+            <label>Faixa de preço do seu restaurante:</label>
+            <div class="question-answer">
+              <div>
+                <input type="radio" value="$" id="$" name="price"/>
+                <label for="$" class="radio"><span>$</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="$$" id="$$" name="price"/>
+                <label for="$$" class="radio"><span>$$</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="$$$" id="$$$" name="price"/>
+                <label for="$$$" class="radio"><span>$$$</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="$$$$" id="$$$$" name="price"/>
+                <label for="$$$$" class="radio"><span>$$$$</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="$$$$$" id="$$$$$" name="price"/>
+                <label for="$$$$$" class="radio"><span>$$$$$</span></label>
+              </div>
+            </div>
+          </div>
+
           <div class="question">
             <label>Qual desses é verdade sobre seu restaurante?</label>
             <div class="question-answer">
@@ -68,10 +145,26 @@
               </div>
             </div>
           </div>
+
+          <div class="question">
+            <label>Restaurante possui entrega?</label>
+            <div class="question-answer">
+              <div>
+                <input type="radio" value="possui_entrega" id="possui_entrega" name="delivery"/>
+                <label for="possui_entrega" class="radio"><span>Sim.</span></label>
+              </div>
+              <div>
+                <input  type="radio" value="nao_possui_entrega" id="nao_possui_entrega" name="delivery"/>
+                <label for="nao_possui_entrega" class="radio"><span>Não.</span></label>
+              </div>
+            </div>
+          </div>
+
           <div>
             <button type="submit" onclick="createRestaurant()" href="/">Novo Restaurante</button>
-            <button type="reset" href="C:/podcome/new-restaurant.html">Cancelar</button>
+            <button type="reset">Cancelar</button>
           </div>
+
       </form>
     </div>
   </body>
