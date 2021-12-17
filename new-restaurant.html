@@ -12,9 +12,9 @@
         const name = document.getElementById("restaurant_name").value;
         const address = document.getElementById("restaurant_address").value;
         const contact = document.getElementById("restaurant_contact").value;
-        
         let price = '';
         let restriction = '';
+        let delivery = '';
 
         const price_radio_buttons = document.querySelectorAll('input[name="price"]');
         for (const price_radio_button of price_radio_buttons) {
@@ -34,8 +34,8 @@
 
         const delivery_radio_buttons = document.querySelectorAll('input[name="delivery"]');
         for (const delivery_radio_button of delivery_radio_buttons) {
-          if (restriction_radio_button.checked) {
-            if(restriction_radio_button.value=="possui_entrega"){
+          if (delivery_radio_buttons.checked) {
+            if(delivery_radio_buttons.value=="possui_entrega"){
               delivery = true;
             }
             else{
@@ -45,15 +45,9 @@
         }
 
         let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-                alert(this.responseText);
-          }
-        };
-        xhttp.open("POST", "/api/v1/restaurantes/adicionar", true);
+        xhttp.open("POST", "http://127.0.0.1:8080/api/v1/restaurantes/adicionar", true);
         xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(
-          {
+        infos = JSON.stringify({
             "nome":name,
             "endereco":address,
             "restricao":restriction,
@@ -63,9 +57,9 @@
             "nota":4,
             "temEntrega":delivery,
             "contato":contact
-          }
-        );
-      
+          });
+        xhttp.send(infos);
+
       }
     </script>
 

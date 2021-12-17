@@ -43,9 +43,9 @@
                     });  
                 }
 
-            function contentLoc(nome, preço, estrelas){
+            function contentLoc(nome, preço, estrelas, entrega){
                 if(estrelas !== undefined){
-                return nome + "<br/>" + preço + "<br/>" + estrelas + " estrelas";
+                return nome + "<br/>" + "Faixa de preço: " + preço + "<br/>" + "Avaliação: "+ estrelas + " estrelas" + "<br/>" +  "Tem entrega: " + entrega;
                 }else{
                     return nome + "<br/> referencia: " + preço;
                 }
@@ -64,12 +64,16 @@
                     console.log(restaurants);
 
                     for (i = 0; i < restaurants.length; i++) {
+
                         var url = "";
-                        console.log(restaurants[i].temEntrega);
+                        var entregaParsed = "";
+
                         if (restaurants[i].temEntrega){
                             url = 'https://cdn-icons.flaticon.com/png/512/2308/premium/2308855.png?token=exp=1639616656~hmac=f3657333051570902b2344c6de7d7faa';
+                            entregaParsed = "Sim";
                         }else{
                             url = 'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
+                            entregaParsed = "Não";
                         }
 
                         var icon = {
@@ -85,8 +89,14 @@
                             map: map,
                             icon: icon
                         });
+
                         marker['infowindow'] = new google.maps.InfoWindow({
-                            content: contentLoc(restaurants[i].nome, restaurants[i].price, restaurants[i].stars)
+                            content: contentLoc(
+                                restaurants[i].nome.bold(), 
+                                restaurants[i].price, 
+                                restaurants[i].stars,
+                                entregaParsed
+                            )
                         });
                         google.maps.event.addListener(marker, 'mouseover', function() {
                             this['infowindow'].open(map, this);
