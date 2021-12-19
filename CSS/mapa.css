@@ -25,8 +25,12 @@ body {
     background-color:#e5dbaf;
     display: flex;
     justify-content: space-between;
-    width:100%;
+    width:80%;
     height: auto;
+}
+
+.container{
+  width:20%;
 }
 
 .navbar{
@@ -121,7 +125,8 @@ html {
 /* Map */
 .map {
   height: 48rem;
-  margin-left:22%;
+  width: 70%;
+  margin-left:27.5%;
   margin-top:0%;
   margin-right:1%;
 }
