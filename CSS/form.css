@@ -132,6 +132,19 @@ label.radio {
 .question-answer label {
   display: block;
 }
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+  position: relative;
+  height: 100px;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 label.radio:before {
   content: "";
   position: absolute;
@@ -178,6 +191,21 @@ button {
   color: #ffffff;
   cursor: pointer;
 }
+
+.buttonc {
+  margin: auto;
+  width: 60%;
+  padding: 1px;
+  position: relative;
+  height: 100px;
+  display: flex;
+  border-radius: 1px; 
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 button:hover {
   background:  #608600;
 }

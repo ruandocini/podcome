@@ -27,7 +27,7 @@
             <ul>
                 <li> <a href="index.html"> HOME </a></li>
                 <li> <a href="search.html"> SEARCH </a></li> 
-                <!-- <li> <button id="btn"> VEGAN </button></li>  -->
+                <li> <a href="login.html"> AREA DO RESTAURANTE </a></li> 
             </ul>
         </div>
 
@@ -103,7 +103,6 @@
                         return response.json();
                     }).then(function(data){
                         for (counter=0; counter<data.length; counter++){
-                            console.log(data[counter].restricao);
                             if (data[counter].restricao == restriction || restriction == false){
                                 addMarker(
                                     {

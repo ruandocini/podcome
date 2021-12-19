@@ -1,0 +1,129 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+    <link rel="stylesheet" href="css/login.css">     
+
+
+    <script>
+        let btn = document.querySelector('.fa-eye')
+
+btn.addEventListener('click', ()=>{
+  let inputSenha = document.querySelector('#senha')
+  
+  if(inputSenha.getAttribute('type') == 'password'){
+    inputSenha.setAttribute('type', 'text')
+  } else {
+    inputSenha.setAttribute('type', 'password')
+  }
+})
+
+function entrar(){
+  let usuario = document.querySelector('#usuario')
+  let userLabel = document.querySelector('#userLabel')
+  
+  let senha = document.querySelector('#senha')
+  let senhaLabel = document.querySelector('#senhaLabel')
+  
+  let msgError = document.querySelector('#msgError')
+  let listaUser = []
+  
+  let userValid = {
+    nome: '',
+    user: '',
+    senha: ''
+  }
+  
+  api_call = 'http://localhost:8080/api/v1/restaurantes/restaurantes';
+    fetch(api_call).then(function(response){
+        return response.json();
+    }).then(function(data){
+        listaUser.push(data);
+        listaUser = listaUser[0];
+
+        listaUser.forEach((item) => {
+
+        console.log(item.usuario)
+        console.log(usuario.value)
+
+        console.log(item.senha)
+        console.log(senha.value)
+
+        if(usuario.value == item.usuario && senha.value == item.senha){
+            userValid = {
+                    nome: item.usuario,
+                    user: item.usuario,
+                    senha: item.senha
+                }
+            
+            console.log(userValid);
+                
+            }
+        
+        
+        if(usuario.value == userValid.user && senha.value == userValid.senha){
+
+            window.location.href = '/search.html'
+
+            let mathRandom = Math.random().toString(16).substr(2)
+            let token = mathRandom + mathRandom
+
+            localStorage.setItem('token', token)
+            localStorage.setItem('userLogado', JSON.stringify(userValid))
+
+        } else {
+            userLabel.setAttribute('style', 'color: red')
+            usuario.setAttribute('style', 'border-color: red')
+            senhaLabel.setAttribute('style', 'color: red')
+            senha.setAttribute('style', 'border-color: red')
+            msgError.setAttribute('style', 'display: block')
+            msgError.innerHTML = 'Usuário ou senha incorretos'
+            usuario.focus()
+        }
+
+        })
+
+    }); 
+}
+
+    function sair(){
+        localStorage.clear()
+        window.location.href = '/search.html'
+    }
+
+    
+    </script>
+</head>
+    
+    <body>
+    
+    <div class='container'>
+      <div class='card'>
+        <h1> Entrar </h1>
+        
+        <div id='msgError'></div>
+        
+        <div class='label-float'>
+          <input type='text' id='usuario' paceholder='' required>
+          <label id='userLabel' for='usuario'>Usuario</label>
+        </div>
+        
+        <div class='label-float'>
+          <input type='password' id='senha' paceholder='' required>
+          <label id='senhaLabel' for='senha'>Senha</label>
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </div>
+        
+        <div class='justify-center'>
+          <button onclick='entrar()'>Entrar</button>
+        </div>
+        
+        <div class='justify-center'>
+          <hr>
+        </div>
+        
+        <p> Não tem uma conta?
+          <a href='/new-restaurant.html'> Cadastre-se </a>
+        </p>
+        
+      </div>
+      </div>
+    </body>
