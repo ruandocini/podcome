@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="imgs/logo.png">
+    <title>Comer Melhor</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/form.css">
+
+    <script>
+      function createDish() {
+        const prato = document.getElementById("nomeDoPrato").value;
+        const preco = document.getElementById("preco").value;
+        const nomeDoRestaurante = document.getElementById("nomeDoRestaurante").value;
+
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "http://127.0.0.1:8080/api/v1/prato/adicionar", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        const w = localStorage.getItem('userLogado');
+        const storageObj = JSON.stringify(w);
+        console.log(storageObj.nome);
+        infos = JSON.stringify({
+            "nomeDoPrato":prato,
+            "preco":preco,
+            "nomeDoRestaurante":nomeDoRestaurante
+          });
+        xhttp.send(infos);
+
+      }
+    </script>
+
+  </head>
+
+  <body>
+    <div class="testbox">
+      <form>
+        <div class="banner">
+          <h1>Adicione seu novo prato</h1>
+        </div>
+        <br/>
+
+
+          <div class="item">
+            <label for="nomeDoPrato">Nome do prato<span>*</span></label>
+            <input id="nomeDoPrato" type="text" name="nomeDoPrato" />
+          </div>
+
+          <div class="item">
+            <label for="nomeDoRestaurante">Nome do restaurante<span>*</span></label>
+            <input id="nomeDoRestaurante" type="text" name="nomeDoRestaurante" />
+          </div>
+
+          <div class="item">
+            <label for="preco">Preço<span>*</span></label>
+            <input id="preco" type="text" name="preco" />
+          </div>
+
+          <div>
+            <button type="submit" onclick="createDish()" formaction="/profile-page.html">Adicionar</button>
+            <button type='submit' formaction="/index.html"> Cancelar </button>
+          </div>
+
+      </form>
+    </div>
+  </body>
+</html>

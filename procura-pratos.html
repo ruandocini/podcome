@@ -1,0 +1,67 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">  
+    <link rel="stylesheet" href="css/profile-page.css">     
+
+    <script>
+            
+    function addList(x){
+        var list = ''
+        var item = 1;
+
+        for (counter=0; counter<x.length; counter++) {
+            list += "<div class='card'><h2> Nome do prato: " + x[counter].nomeDoPrato + "</h2>";
+            list += "<p> Preço: " + x[counter].preco + '</p></div>';
+        }
+
+        document.querySelector('#lista').innerHTML = list;
+    }
+
+    function searchDishes(restaurantName){
+        var dishList = [];
+        pratos_call = 'http://127.0.0.1:8080/api/v1/prato/pratos'
+        restaurantes = fetch(pratos_call)
+        .then(response => response.json())
+        .then(function(restaurantes){
+            for (counter=0; counter<restaurantes.length; counter++){
+                if(restaurantName == restaurantes[counter].nomeDoRestaurante){
+                    const prato = {
+                        nomeDoPrato:restaurantes[counter].nomeDoPrato,
+                        nomeDoRestaurante:restaurantes[counter].nomeDoRestaurante,
+                        preco:restaurantes[counter].preco
+                    };
+                dishList.push(prato);
+                }
+            }
+            addList(dishList);
+            console.log(dishList);
+        });
+    }
+
+    function search() {
+        document.getElementById('input').addEventListener('keypress', function(e){
+        if (e.key === 'Enter') {
+            console.log('name');
+            searchDishes(document.getElementById('input').value);
+        }
+        });
+    }
+    
+    
+    </script>
+    <div class="navbar"> 
+        <ul>
+            <li> <a href="index.html"> HOME </a></li>
+            <li> <a href="search.html"> SEARCH </a></li> 
+            <li> <a href="procura-pratos.html"> PRATOS </a></li> 
+            <li> <a href="login.html"> AREA DO RESTAURANTE </a></li> 
+        </ul>
+    </div>
+    <input id="input" style="height: 25px; width:100%; margin-bottom: 2px;">
+
+</head>
+    <body onload=search()>
+        <div>
+        <h1>Pratos</h1>
+        <h2 id="lista"></h2>
+        </div>
+    </body>
