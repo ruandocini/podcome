@@ -74,7 +74,7 @@
                         icon:icon
                     });
 
-                     var infoWindow = new google.maps.InfoWindow({content:props.text});
+                     var infoWindow = new google.maps.InfoWindow({content:'<strong>' + props.nome + '</strong>' + '<br>' + 'Contato: ' + props.contato + '<br>' + 'Tem Entrega? ' + props.temEntrega + '<br>' + 'Restrição: ' + props.restricao});
 
                     marker.addListener('click', function(){infoWindow.open(map, marker);});
 
@@ -108,7 +108,14 @@
                                 addMarker(
                                     {
                                         coords:{lat:data[counter].latitude, lng:data[counter].longitude},
-                                        text:data[counter].nome,
+                                        nome:data[counter].nome,
+                                        lat:data[counter].latitude,
+                                        long:data[counter].longitude,
+                                        price:data[counter].preco,
+                                        stars:data[counter].nota,
+                                        temEntrega:data[counter].temEntrega,
+                                        contato:data[counter].contato,
+                                        restricao:data[counter].restricao,
                                         url:'http://maps.google.com/mapfiles/kml/shapes/convenience.png'
                                     });
                                 }
